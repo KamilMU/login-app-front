@@ -1,14 +1,14 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
+import auth from './auth';
 
-function LoginForm({ findUser, login, password, onChange }) {
-  const history = useHistory();
-  const goLogin = () => history.push('home');
-
+function LoginForm({ findUser, login, password, onChange, history }) {
+  // const history = useHistory();
+  // const goLogin = () => history.push('home');
   return (
     <div className="form-container">
-      <div className="form-container__tittle">Login</div>
-      <form onSubmit={e => { e.preventDefault(); findUser(login); goLogin() }}>
+      <div className="form-container__tittle">Login Form</div>
+      <form onSubmit={e => { e.preventDefault() }}>
         <div>
           <input
             name="login"
@@ -28,11 +28,17 @@ function LoginForm({ findUser, login, password, onChange }) {
           />
         </div>
         <div>
-          <button type="button" onClick={() => { findUser(login); goLogin() }}>Login</button>
+          <button type="button" onClick={() => {
+            auth.login(() => {
+              if (history !== 'undefined' && auth.isAuthenticated(login) && login.length > 0 && password) {
+                history.push('/home')
+              }
+            })
+          }}>Login</button>
         </div>
       </form>
     </div>
   )
 }
 
-export default LoginForm
+export default withRouter(LoginForm)

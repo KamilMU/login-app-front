@@ -44,3 +44,13 @@ button {
 button:hover {
   color: rgb(146, 164, 204)
 }
+
+/* Home */
+
+.home-container {
+  display: flex;
+  width: 80%;
+  max-width: 400px;
+  justify-content: space-between;
+  margin: auto;
+}
