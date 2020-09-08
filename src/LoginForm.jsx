@@ -2,17 +2,16 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import auth from './auth';
 
-function LoginForm({ findUser, login, password, onChange, history }) {
-  // const history = useHistory();
-  // const goLogin = () => history.push('home');
+function LoginForm({ login, password, onChange, history }) {
   return (
     <div className="form-container">
       <div className="form-container__tittle">Login Form</div>
-      <form onSubmit={e => { e.preventDefault() }}>
+      <form action="" onSubmit={e => e.preventDefault()}>
         <div>
           <input
             name="login"
             value={login}
+            className="input-text"
             onChange={onChange}
             type="login"
             autoComplete="on"
@@ -22,6 +21,7 @@ function LoginForm({ findUser, login, password, onChange, history }) {
           <input
             name="password"
             value={password}
+            className="input-text"
             onChange={onChange}
             type="password"
             autoComplete="on"

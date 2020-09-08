@@ -14,20 +14,15 @@ class Auth {
   }
 
   isAuthenticated = async (login) => {
-    console.log(login.length)
-    if (login && login.length !== 0) {
-      await fetch(`https://api.github.com/users/${login}`)
-        .then(response => {
-          if (response.status !== 200) {
-            return null;
-          } else {
-            return response.json();
-          }
-        }
-        )
-        .then(data => { if (data) return this.authenticated = true })
-    }
+    if (login && login.length !== 0) return
+    await fetch(`https://api.github.com/users/${login}`)
+      .then(response => {
+        if (response.status !== 200) return null;
 
+        return response.json();
+      }
+      )
+      .then(data => { if (data) return this.authenticated = true })
   }
 }
 
