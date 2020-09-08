@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import auth from './auth';
 
-function LoginForm({ login, password, onChange, history }) {
+function LoginForm({ history }) {
+  const [login, setLogin] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <div className="form-container">
       <div className="form-container__tittle">Login Form</div>
@@ -12,7 +15,7 @@ function LoginForm({ login, password, onChange, history }) {
             name="login"
             value={login}
             className="input-text"
-            onChange={onChange}
+            onChange={e => setLogin(e.target.value)}
             type="login"
             autoComplete="on"
           />
@@ -22,7 +25,7 @@ function LoginForm({ login, password, onChange, history }) {
             name="password"
             value={password}
             className="input-text"
-            onChange={onChange}
+            onChange={e => setPassword(e.target.value)}
             type="password"
             autoComplete="on"
           />

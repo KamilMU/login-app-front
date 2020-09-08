@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import auth from './auth'
 
-function Home(props) {
-  console.log(props.posts, 'posts')
+function Home({ createPost, text, deletePost, handleChange, posts, setText, history }) {
   return (
     <div className="home-container">
       {/* header */}
       <header>
         <button onClick={() => {
           auth.logout(() =>
-            props.history.push('/'))
+            history.push('/'))
         }}>
           Log Out
       </button>
@@ -22,18 +21,26 @@ function Home(props) {
             type="text"
             name="text"
             className="input-text"
-            value={props.text}
-            onChange={props.onChange}
+            value={text}
+            onChange={e => setText(e.target.value)}
             placeholder="text..."
           />
-          <button onClick={() => props.createPost(props.text)}>Add post</button>
+          <button onClick={() => createPost(text)}>Add post</button>
         </form>
         <ul className="post-list">
-          {props.posts.map(post =>
+          {posts.map(post =>
             <li className="post-list__post" key={post.id}>{post.text}
-              <input type="file" className="input-file" onChange={(event) => props.handleChange(event, post.id)} />
-              <img alt="" src={post.imgSrc} />
-              <div className="delete" onClick={() => props.deletePost(post.id)}>x</div>
+              <input
+                type="file"
+                className="input-file"
+                onChange={(event) => handleChange(event, post.id)}
+              />
+              <img
+                alt=""
+                src={post.imgSrc}
+              />
+              <div
+                className="delete" onClick={() => deletePost(post.id)}>x</div>
             </li>
           )}
         </ul>
